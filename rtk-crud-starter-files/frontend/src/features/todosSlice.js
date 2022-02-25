@@ -15,10 +15,10 @@ const initialState = {
     deleteTodoError: "",
 }
 
-const todosAdd = createAsyncThunk("todos/todosAdd",async(todo,{rejectWithValue})=>{
+export const todosAdd = createAsyncThunk("todos/todosAdd",async(todo,{rejectWithValue})=>{
     try {
         const response = await axios.post(baseUrl + "todos",todo)
-        return response.data
+        return response.data;
     } catch (error) {
         console.log(error)
         return rejectWithValue(error.response.data)
@@ -51,6 +51,20 @@ const todosSlice = createSlice({
                 todos:[action.payload,...state.todos],
                 addTodoStatus:"success",
                 addTodoError: "",
+                getTodoStatus: "",
+                getTodoError: "",
+                updateTodoStatus: "",
+                updateTodoError: "",
+                deleteTodoStatus: "",
+                deleteTodoError: "",
+
+            }
+        },
+        [todosAdd.rejected]:(state,action)=>{
+            return{
+                ...state,
+                addTodoStatus:"rejected",
+                addTodoError: action.payload,
                 getTodoStatus: "",
                 getTodoError: "",
                 updateTodoStatus: "",
