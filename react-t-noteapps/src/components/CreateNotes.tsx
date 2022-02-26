@@ -17,7 +17,7 @@ const CreateNotes: React.FunctionComponent<ICreateNotesProps> = ({notes,setNotes
 const handleSubmit = (e:React.FormEvent<HTMLFormElement>):void =>{
     e.preventDefault();
     if(titleRef.current?.value === "" || textRef.current?.value===""){
-        return setError("All field are mandatory");
+        return setError("All fields are mandatory");
     }
     setError("");
     setNotes([...notes,{
